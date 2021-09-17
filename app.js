@@ -31,7 +31,8 @@ function read() {
                 ind ++
             }
         })
-        console.log(data[0])
+        resultm = (intm * 100) / (data.length - 2)
+        resultf = (intf * 100) / (data.length - 2)
         fs.writeFile('Men.csv', data[0] + "\n", {encoding: 'utf8', flag: 'w+', mode: 0o666}, function (err) {});
         tabM.forEach((e) => {
             fs.writeFile('Men.csv', e, {encoding: 'utf8', flag: 'a+', mode: 0o666}, function (err) {});
@@ -42,7 +43,7 @@ function read() {
             fs.writeFile('Women.csv', e, {encoding: 'utf8', flag: 'a+', mode: 0o666}, function (err) {});
         })
         console.log('File of women has been updated !');
-        console.log("The mâle percentage is :", (intm * 100) / data.length, "%. The femâle percentage is :", (intf * 100) / data.length, "%.")
+        console.log("The mâle percentage is :", resultm.toFixed(2), "%. The femâle percentage is :", resultf.toFixed(2), "%.")
     })
 }
 read()
