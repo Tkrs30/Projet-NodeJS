@@ -8,6 +8,8 @@ function read() {
     var intf = 0
     var intm = 0
     var ind = 0
+    var finalstrm = 0
+    var finalstrf = 0
     fs.readFile('./MOCK_DATA.csv', 'utf8',function (err, data) {
         if (err) {
             console.error(err)
@@ -31,17 +33,17 @@ function read() {
                 ind ++
             }
         })
+        tabM.forEach((f) => {
+            finalstrm = finalstrm + f
+        })
+        tabF.forEach((f) => {
+            finalstrf = finalstrf + f
+        })
         resultm = (intm * 100) / (data.length - 2)
         resultf = (intf * 100) / (data.length - 2)
-        fs.writeFile('Men.csv', data[0] + "\n", {encoding: 'utf8', flag: 'w+', mode: 0o666}, function (err) {});
-        tabM.forEach((e) => {
-            fs.writeFile('Men.csv', e, {encoding: 'utf8', flag: 'a+', mode: 0o666}, function (err) {});
-        })
+        fs.writeFile('Men.csv', finalstrm, {encoding: 'utf8', flag: 'w+', mode: 0o666}, function (err) {});
         console.log('File of men has been updated !');
-        fs.writeFile('Women.csv', data[0] + "\n", {encoding: 'utf8', flag: 'w+', mode: 0o666}, function (err) {});
-        tabF.forEach((e) => {
-            fs.writeFile('Women.csv', e, {encoding: 'utf8', flag: 'a+', mode: 0o666}, function (err) {});
-        })
+        fs.writeFile('Women.csv', finalstrf, {encoding: 'utf8', flag: 'w+', mode: 0o666}, function (err) {});
         console.log('File of women has been updated !');
         console.log("The mâle percentage is :", resultm.toFixed(2), "%. The femâle percentage is :", resultf.toFixed(2), "%.")
     })
